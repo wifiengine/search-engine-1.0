@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<link rel="icon" type="icon" href="/home/wifiengine/Desktop/[code]/SEARCH ENGINE/icon.png">
+	<title></title>
+	<style type="text/css">
+		body {
+			margin: 0px;
+		}
+		textarea {
+			background-color: black;
+			color: #00AEFF;
+			border: none;
+			margin: 0px;
+			height: 600px;
+			font-size: 20px;
+			font-family: helvetica;
+		}
+	</style>
+</head>
+<body>
+<textarea rows="20" cols="1" id="user">></textarea><textarea rows="20" cols="100" id="textarea"></textarea>
+	<script type="text/javascript">
+		//variables
+		var user = document.getElementById("user");
+		var textarea = document.getElementById("textarea");
+		
+		//when the window starts up
+		window.onload = function() {
+			textarea.focus();
+			textarea.style.fontSize = "20px";
+			textarea.style.color = "#7161EF";
+			textarea.width = window.innerWidth;
+			textarea.height = window.innerHeight;
+			user.style.fontSize = "50px;"
+			user.width = window.innerWidth;
+			user.height = window.innerHeight;
+			
+		};
+
+		window.addEventListener("keypress",function(event) {
+			if(event.keyCode == 13) {
+				//redirect to youtube
+				if(textarea.value == "yt") {
+					window.location = "http://youtube.com";
+				}
+				//URL search
+				else if(textarea.value.slice(-4) == ".com" ||
+						textarea.value.slice(-6) == ".co.za" ||
+						textarea.value.slice(-4) == ".org" ||
+						textarea.value.slice(-5) == ".html") {
+					window.location = "http://" + textarea.value;
+				}
+				//search on youtube
+				else if(textarea.value.slice(0, 3) == "yt ") {
+					var yt = textarea.value.slice(3, 100);
+					window.location = "https://www.youtube.com/results?search_query=" + yt;
+				}
+				//search defenition on merriam-webster
+				else if(textarea.value.slice(0, 4) == "def ") {
+					var defenition = textarea.value.slice(4, 100);
+					window.location = "https://www.merriam-webster.com/dictionary/" + defenition;
+				}
+				//search wikipedia
+				else if(textarea.value.slice(0, 5) == "wiki ") {
+					var wiki = textarea.value.slice(5, 100);
+					window.location = "https://en.wikipedia.org/wiki/" + wiki;
+				}
+				//search for a synonym
+				else if(textarea.value.slice(0, 4) == "syn ") {
+					var syn = textarea.value.slice(4, 100);
+					window.location = "https://www.thesaurus.com/browse/" + syn;
+				}								
+				//search for a antonym
+				else if(textarea.value.slice(0, 4) == "ant ") {
+					var ant = textarea.value.slice(4, 100);
+					window.location = "https://www.antonym.com/synonyms/" + ant;
+				}
+				//go to stack overflow
+				else if(textarea.value.slice(0, 2) == "so") {
+					var so = textarea.value.slice(2, 100);
+					window.location = "https://stackoverflow.com/";
+				}																											
+				//help
+				else if(textarea.value == "help") {
+					textarea.value = "help \n yt = youtube \n def = defenition \n wiki = search wikipedia \n syn = synonym \n ant = antonym \n so = stack overflow \n ---press 1 to continue---";
+						window.addEventListener("keypress",function(event) {
+							if(event.keyCode == 49) {
+								textarea.value = "";
+							}
+						});
+				}
+				//common search
+				else {
+					var search = textarea.value.slice(0, 100)
+					window.location = "http://duckduckgo.com/" + search + "&ia=web";
+				}
+				
+			
+			}	
+			});
+
+	</script>
+</body>
+</html>
